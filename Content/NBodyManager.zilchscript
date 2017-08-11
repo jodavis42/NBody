@@ -1,0 +1,61 @@
+class BodyInfo
+{
+  var Mass : Real;
+  var Position : Real3;
+}
+
+class NBodyManager : ZilchComponent
+{
+  var Bodies : Array[Cog] = Array[Cog]();
+  [Property] var G : Real = 1.0;
+  
+  function Initialize(init : CogInitializer)
+  {
+    Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    Zero.Connect(this.Space, Events.AddBody, this.OnAddBody);
+  }
+
+  function OnAddBody(event : NBodyEvent)
+  {
+    this.Bodies.Add(event.Body);
+  }
+  
+  function ComputeForce(posA : Real3, posB : Real3, massA : Real, massB : Real) : Real3
+  {
+    var diff = posB - posA;
+    var denom = Math.Length(diff);
+    denom = denom * denom * denom;
+    var numer = this.G * massA * massB;
+    
+    var force = (numer / denom) * diff;
+    return force;
+  }
+  
+  function ComputeForce(i : Integer, j : Integer)
+  {
+    var bodyA = this.Bodies[i];
+    var bodyB = this.Bodies[j];
+    
+    var massA = bodyA.MassOverride.Mass;
+    var massB = bodyB.MassOverride.Mass;
+    
+    var posA = bodyA.Transform.WorldTranslation;
+    var posB = bodyB.Transform.WorldTranslation;
+    
+    var force = this.ComputeForce(posA, posB, massA, massB);
+    bodyA.RigidBody.Force += force;
+    bodyB.RigidBody.Force -= force;
+  }
+
+  function OnLogicUpdate(event : UpdateEvent)
+  {
+    var count = this.Bodies.Count;
+    for(var i = 0; i < count; ++i)
+    {
+      for(var j = i + 1; j < count; ++j)
+      {
+        this.ComputeForce(i, j);
+      }
+    }
+  }
+}

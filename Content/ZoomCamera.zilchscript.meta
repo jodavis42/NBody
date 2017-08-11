@@ -1,0 +1,9 @@
+[Version:1]
+TextContent 
+{
+	ZilchScriptBuilder 
+	{
+		var Name = "ZoomCamera"
+		var ResourceId = 0x59b3b1646fcbce9a
+	}
+}

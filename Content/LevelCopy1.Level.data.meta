@@ -1,0 +1,12 @@
+[Version:1]
+DataContent 
+{
+	DataBuilder 
+	{
+		var Name = "LevelCopy1"
+		var ResourceId = 0x59b3bb640de4c34f
+		var LoaderType = "Level"
+		var Version = 0
+		var ShowInEditor = true
+	}
+}

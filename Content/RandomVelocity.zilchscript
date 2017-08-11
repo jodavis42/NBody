@@ -1,0 +1,17 @@
+class RandomVelocity : ZilchComponent
+{
+  [Dependency] var RigidBody : RigidBody;
+  
+  [Property] var Mode2D : Boolean = true;
+  [Property] var MinVelocity : Real = 5;
+  [Property] var MaxVelocity : Real = 10;
+  
+  function Initialize(init : CogInitializer)
+  {
+    var random = this.Owner.LevelSettings.RandomContext;
+    if(this.Mode2D)
+      this.RigidBody.Velocity = Real3(random.Vector2(this.MinVelocity, this.MaxVelocity), 0);
+    else
+      this.RigidBody.Velocity = random.Vector3(this.MinVelocity, this.MaxVelocity);
+  }
+}

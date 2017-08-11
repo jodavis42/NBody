@@ -1,0 +1,53 @@
+[Version:1]
+Cog 
+{
+	var Name = "Sphere"
+	Transform 
+	{
+		var Translation = Real3{-18.7841644, 20.1119919, 0}
+		var Scale = Real3{1, 1, 1}
+		var Rotation = Quaternion{0, 0, 0, 1}
+	}
+	Model 
+	{
+		var Visible = true
+		var ViewCulling = true
+		var VisibilityEvents = true
+		var OverrideBoundingBox = false
+		var LocalAabbCenter = Real3{0, 0, 0}
+		var LocalAabbHalfExtents = Real3{1, 1, 1}
+		var GroupSortValue = 0
+		var Material = "583afb5e7bf75e18:ZeroMaterial"
+		var Mesh = "4de0354322b376ae:Sphere"
+	}
+	RigidBody 
+	{
+		var Velocity = Real3{0, 0, 0}
+		var AngularVelocity = Real3{0, 0, 0}
+		var DynamicState = RigidBodyDynamicState.Dynamic
+		var AllowSleep = true
+		var Asleep = false
+		var RotationLocked = false
+		var Mode2D = Mode2DStates.InheritFromSpace
+	}
+	SphereCollider 
+	{
+		var Ghost = false
+		var SendsEvents = true
+		var Material = "4de020863e872da8:DefaultPhysicsMaterial"
+		var CollisionGroup = "4e740859314e5515:DefaultGroup"
+		var Offset = Real3{0, 0, 0}
+		var Radius = 0.5
+	}
+	MassOverride 
+	{
+		var Active = true
+		var InverseMass = 1
+		var Mass = 1
+		var LocalInverseInertiaTensor = Real3x3{10, 0, 0, 0, 10, 0, 0, 0, 10}
+		var LocalCenterOfMass = Real3{0, 0, 0}
+	}
+	NBody 
+	{
+	}
+}

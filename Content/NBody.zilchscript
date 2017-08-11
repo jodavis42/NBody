@@ -1,0 +1,39 @@
+class NBodyEvent : ZilchEvent
+{
+  var Body : Cog;
+}
+
+class NBody : ZilchComponent
+{
+  [Dependency] var MassOverride : MassOverride;
+  
+  sends AddBody : NBodyEvent;
+  sends RemoveBody : NBodyEvent;
+  
+  function Initialize(init : CogInitializer)
+  {
+    //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    Zero.Connect(init, Events.AllObjectsInitialized, this.OnAllObjectsInitialized);
+    Zero.Connect(this.Owner, Events.CogDestroy, this.OnCogDestroy);
+  }
+
+  function OnCogDestroy(event : ObjectEvent)
+  {
+    this.SendEvent(Events.RemoveBody);
+  }
+
+  function OnAllObjectsInitialized(event : CogInitializerEvent)
+  {
+    this.SendEvent(Events.AddBody);
+  }
+  
+  function SendEvent(eventName : String)
+  {
+    var toSend = NBodyEvent() {Body = this.Owner};
+    this.Space.DispatchEvent(eventName, toSend);
+  }
+
+  function OnLogicUpdate(event : UpdateEvent)
+  {
+  }
+}

@@ -1,0 +1,8 @@
+[Version:1]
+ContentLibrary 
+{
+	var Name = "NBody2D"
+	var LibraryId = 0x59b3a609901d0e73
+	var SourceControlType = ""
+	var ReadOnly = false
+}

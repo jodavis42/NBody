@@ -1,0 +1,40 @@
+class RandomGalaxyCreation : ZilchComponent
+{
+  [Property] var BodyArchtype : Archetype = Archetype.Body;
+  [Property] var Mode2D : Boolean = true;
+  [Property] var BodyCount : Integer = 20;
+  [Property] var RadiusRange : Real2 = Real2(0, 20.0);
+  [Property] var VelocityRange : Real2 = Real2(2, 5);
+  [Property] var MassRange : Real2 = Real2(1, 1);
+  
+  function Initialize(init : CogInitializer)
+  {
+    Zero.Connect(init, Events.AllObjectsInitialized, this.OnAllObjectsInitialized);
+  }
+
+  function OnAllObjectsInitialized(event : CogInitializerEvent)
+  {
+    if(this.Mode2D)
+      this.Create2D();
+  }
+  
+  function Create2D()
+  {
+    var random = this.LevelSettings.RandomContext;
+    for(var i = 0; i < this.BodyCount; ++i)
+    {
+      var pos = Real3(random.Vector2(this.RadiusRange.X, this.RadiusRange.Y), 0);
+      var vel = Real3(random.Vector2(this.VelocityRange.X, this.VelocityRange.Y), 0);
+      var mass = random.Range(this.MassRange.X, this.MassRange.Y);
+      
+      var body = this.Space.CreateAtPosition(this.BodyArchtype, pos);
+      body.RigidBody.Velocity = vel;
+      body.MassOverride.Mass = mass;
+      body.Transform.Scale = Real3(mass);
+    }
+  }
+
+  function OnLogicUpdate(event : UpdateEvent)
+  {
+  }
+}
