@@ -1,0 +1,13 @@
+[Version:1]
+DataContent 
+{
+	ZilchPluginBuilder 
+	{
+		var Name = "Simulation"
+		var ResourceId = 0x59c71218fc92250d
+		var LoaderType = "ZilchPluginSource"
+		var Version = 0
+		var ShowInEditor = true
+		var SharedLibraryResourceId = 0x59c71218fc922515
+	}
+}

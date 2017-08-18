@@ -1,0 +1,9 @@
+[Version:1]
+TextContent 
+{
+	ZilchFragmentBuilder 
+	{
+		var Name = "SpriteSourceColorOverride"
+		var ResourceId = 0x59db3130379428f1
+	}
+}

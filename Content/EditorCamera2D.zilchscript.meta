@@ -3,7 +3,7 @@ TextContent
 {
 	ZilchScriptBuilder 
 	{
-		var Name = "SimpleCamera"
+		var Name = "EditorCamera2D"
 		var ResourceId = 0x59b3ba635d741863
 	}
 }

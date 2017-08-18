@@ -1,0 +1,9 @@
+[Version:1]
+TextContent 
+{
+	ZilchScriptBuilder 
+	{
+		var Name = "PopupOverride"
+		var ResourceId = 0x59db3169449d71ce
+	}
+}

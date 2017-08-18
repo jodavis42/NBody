@@ -6,6 +6,7 @@ class BodyInfo
 
 class NBodyManager : ZilchComponent
 {
+  [Property] var Active : Boolean = true;
   var Bodies : Array[Cog] = Array[Cog]();
   [Property] var G : Real = 1.0;
   
@@ -49,6 +50,9 @@ class NBodyManager : ZilchComponent
 
   function OnLogicUpdate(event : UpdateEvent)
   {
+    if(!this.Active)
+      return;
+      
     var count = this.Bodies.Count;
     for(var i = 0; i < count; ++i)
     {

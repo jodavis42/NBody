@@ -38,10 +38,6 @@ Level
 			var HighlightInterval = 10
 			var FollowEditorCamera = false
 		}
-		NBodyManager 
-		{
-			var G = 10
-		}
 		RandomContext 
 		{
 			var RandomSeed = false
@@ -51,10 +47,29 @@ Level
 		{
 			var BodyArchtype = "59b3bc91dea52182:Body"
 			var Mode2D = true
-			var BodyCount = 70
-			var RadiusRange = Real2{0, 70}
-			var VelocityRange = Real2{0, 3}
-			var MassRange = Real2{0.100000001, 0.400000006}
+			var BodyCount = 100
+			var RadiusRange = Real2{0, 500}
+			var VelocityRange = Real2{0, 0}
+			var MassRange = Real2{0.5, 1}
+		}
+		NBodyManager 
+		{
+			var Active = false
+			var G = 1
+		}
+		BruteForce 
+		{
+			var Active = false
+			var G = 10
+		}
+		BarnesHutQuadTree 
+		{
+			var Active = true
+			var G = 10
+			var DebugDrawLevel = -2
+			var MaxBodies = 10
+			var MaxDepth = 100
+			var Theta = 0.5
 		}
 	}
 	Cog [ContextId:2]
@@ -95,7 +110,7 @@ Level
 		var Name = "EditorCamera"
 		Transform 
 		{
-			var Translation = Real3{-0.106040612, 0.161933899, 10}
+			var Translation = Real3{42.8461037, -0.883545935, 15}
 			var Scale = Real3{1, 1, 1}
 			var Rotation = Quaternion{-0, -1.09278471e-08, 0, 1}
 		}
@@ -148,7 +163,7 @@ Level
 			var FarPlane = 500
 			var PerspectiveMode = PerspectiveMode.Orthographic
 			var FieldOfView = 45
-			var Size = 11.6437702
+			var Size = 315.692413
 		}
 		EditorCameraController 
 		{
@@ -157,7 +172,7 @@ Level
 			var LookDistance = 10
 			var VerticalAngle = 0
 			var HorizontalAngle = 0
-			var LookTarget = Real3{-0.106040612, 0.161933899, 0}
+			var LookTarget = Real3{42.8461037, -0.883545935, 5}
 			var MoveSensitivity = 1
 		}
 		Hierarchy 
@@ -242,8 +257,106 @@ Level
 		}
 		EditorCamera2D 
 		{
-			var ScreenMovementSpeedPerSecond = 0.5
+			var ScreenMovementSpeedPerSecond = 1
 			var ZoomExponent = 1.5
+		}
+	}
+	Cog [ContextId:5]
+	{
+		var Name = "ZoomCamera"
+		Transform 
+		{
+			var Translation = Real3{0.636423171, -2.24197721, 5}
+			var Scale = Real3{1, 1, 1}
+			var Rotation = Quaternion{0, 0, 0, 1}
+		}
+		CameraViewport 
+		{
+			var RenderInEditor = false
+			var RenderInGame = true
+			var RenderOrder = 0
+			var CameraPath = CogPath
+			{
+				var Path = "."
+				var ErrorOnResolveToNull = false
+				var ErrorOnPathCantCompute = false
+				var ErrorOnDirectLinkFail = false
+				var UpdateCogOnPathChange = true
+				var UpdatePathOnCogChange = true
+				var UpdateCogOnInitialize = true
+				var ResolvedNullErrorOccurred = false
+				var Cog = 5
+				var PathPreference0 = CogPathPreference.CogRelative
+				var PathPreference1 = CogPathPreference.SpaceRelative
+				var PathPreference2 = CogPathPreference.Absolute
+			}
+			var RendererPath = CogPath
+			{
+				var Path = ":/Renderer"
+				var ErrorOnResolveToNull = false
+				var ErrorOnPathCantCompute = false
+				var ErrorOnDirectLinkFail = false
+				var UpdateCogOnPathChange = true
+				var UpdatePathOnCogChange = true
+				var UpdateCogOnInitialize = true
+				var ResolvedNullErrorOccurred = false
+				var Cog = 2
+				var PathPreference0 = CogPathPreference.CogRelative
+				var PathPreference1 = CogPathPreference.SpaceRelative
+				var PathPreference2 = CogPathPreference.Absolute
+			}
+			var ResolutionOrAspect = Integer2{400, 400}
+			var RenderToViewport = false
+			var ForwardViewportEvents = true
+			var ViewportScaling = ViewportScaling.Letterbox
+			var MarginColor = Real4{0, 0, 0, 1}
+			var NormalizedSize = Real2{1, 1}
+			var NormalizedOffset = Real2{0, 0}
+		}
+		Camera 
+		{
+			var NearPlane = 0.100000001
+			var FarPlane = 200
+			var PerspectiveMode = PerspectiveMode.Orthographic
+			var FieldOfView = 60
+			var Size = 20
+		}
+		SoundListener 
+		{
+			var Active = true
+		}
+		MouseCapture 
+		{
+		}
+		ZoomCamera 
+		{
+			var Archetype = "59db31164c4b9e63:PopupPreview"
+		}
+		Hierarchy 
+		{
+			Cog [Id:0x59c70a3a4409252f][ContextId:6]
+			{
+				var Name = ""
+				Transform 
+				{
+					var Translation = Real3{0, 0, 0}
+					var Scale = Real3{3, 3, 1}
+					var Rotation = Quaternion{0, 0, 0, 1}
+				}
+				PopupOverride 
+				{
+					var Texture = "null"
+				}
+				SelectionIcon 
+				{
+					var Visible = true
+					var VisibilityEvents = true
+					var Material = "59db311c32517490:AlphaSpriteOverride"
+					var SpriteSource = "5274db4c2e7c11f9:Circle"
+					var ViewScale = 10
+					var OverrideSelections = true
+				}
+			}
 		}
 	}
 }

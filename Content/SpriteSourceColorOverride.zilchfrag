@@ -1,0 +1,18 @@
+[Pixel]
+struct SpriteSourceColorOverride
+{
+  [Input] var Texture : Sampler2d;
+  [Input] var SpriteSource : Sampler2d;
+
+  [FragmentInput][StageInput] var Uv : Real2;
+  [FragmentInput][StageInput] var UvAux : Real2;
+  [FragmentInput][StageInput][Output] var Color : Real4;
+
+  function Main()
+  {
+    var sample0 = this.Texture.Sample(this.UvAux);
+    var sample1 = this.SpriteSource.Sample(this.Uv);
+    sample0 *= sample1.W;
+    this.Color = sample0;
+  }
+}

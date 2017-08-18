@@ -1,0 +1,17 @@
+[RunInEditor]
+class PopupOverride : ZilchComponent
+{
+  [Property][ShaderInput] var Texture : Texture;
+  
+  function Initialize(init : CogInitializer)
+  {
+    Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+  }
+
+  function OnLogicUpdate(event : UpdateEvent)
+  {
+    var parent = this.Owner.Parent;
+    if(parent != null)
+      this.Texture = parent.CameraViewport.FinalTexture;
+  }
+}

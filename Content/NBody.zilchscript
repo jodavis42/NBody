@@ -1,7 +1,7 @@
-class NBodyEvent : ZilchEvent
-{
-  var Body : Cog;
-}
+//class NBodyEvent : ZilchEvent
+//{
+//  var Body : Cog;
+//}
 
 class NBody : ZilchComponent
 {

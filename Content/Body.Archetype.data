@@ -4,8 +4,8 @@ Cog
 	var Name = "Sphere"
 	Transform 
 	{
-		var Translation = Real3{-18.7841644, 20.1119919, 0}
-		var Scale = Real3{1, 1, 1}
+		var Translation = Real3{77.8927155, 5.87553167, 5}
+		var Scale = Real3{2, 2, 2}
 		var Rotation = Quaternion{0, 0, 0, 1}
 	}
 	Model 

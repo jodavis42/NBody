@@ -1,11 +1,54 @@
 class ZoomCamera : ZilchComponent
 {
+  [Dependency] var Transform : Transform;
+  [Dependency] var CameraViewport : CameraViewport;
+  [Dependency] var Camera : Camera;
+  [Dependency] var MouseCapture : MouseCapture;
+  
+  var PopupCog : Cog = null;
+  
+  var ZPos : Real;
+  
+  [Property] var Archetype : Archetype = Archetype.PopupPreview;
+  
   function Initialize(init : CogInitializer)
   {
-    //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    Zero.Connect(this.Space, Events.RightMouseDown, this.OnRightMouseDown);
+    Zero.Connect(this.Owner, Events.MouseDragStart, this.OnMouseDragStart);
+    Zero.Connect(this.Owner, Events.MouseDragMove, this.OnMouseDragMove);
+    Zero.Connect(this.Owner, Events.MouseDragEnd, this.OnMouseDragEnd);
+    Zero.Connect(init, Events.AllObjectsInitialized, this.OnAllObjectsInitialized);
   }
 
-  function OnLogicUpdate(event : UpdateEvent)
+  function OnAllObjectsInitialized(event : CogInitializerEvent)
   {
+    this.PopupCog = this.Owner.Children.Current;
+    this.PopupCog.SelectionIcon.Visible = false;
+  }
+
+  function OnRightMouseDown(event : ViewportMouseEvent)
+  {
+    this.ZPos = this.Transform.WorldTranslation.Z;
+    this.MouseCapture.Capture(event);
+  }
+  
+  function OnMouseDragStart(event : ViewportMouseEvent)
+  {
+    this.PopupCog.SelectionIcon.Visible = true;
+    //this.PopupCog = this.Space.CreateAtPosition(this.Archetype, this.Transform.WorldTranslation);
+    //this.PopupCog.PopupOverride.Texture = this.CameraViewport.FinalTexture;
+  }
+  
+  function OnMouseDragMove(event : ViewportMouseEvent)
+  {
+    this.Transform.WorldTranslation = event.ToWorldZPlane(this.ZPos);
+    //this.Owner.Transform.WorldTranslation = event.ToWorldZPlane(thi
+    //this.PopupCog.Transform.WorldTranslation = event.ToWorldZPlane(0);
+  }
+  
+  function OnMouseDragEnd(event : Event)
+  {
+    this.PopupCog.SelectionIcon.Visible = false;
+    //this.PopupCog.Destroy();
   }
 }
